@@ -3,6 +3,9 @@ using et.api.infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
+using Microsoft.EntityFrameworkCore.Storage;
+using Microsoft.EntityFrameworkCore.Storage.Internal;
 using System;
 
 namespace et.api.infrastructure.Migrations
@@ -22,7 +25,13 @@ namespace et.api.infrastructure.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("City")
+                        .IsRequired();
+
                     b.Property<string>("Name")
+                        .IsRequired();
+
+                    b.Property<string>("State")
                         .IsRequired();
 
                     b.HasKey("Id");

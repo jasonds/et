@@ -10,11 +10,11 @@ using et.domain.Models;
 namespace et.api.Controllers
 {
     [Route("api/products")]
-    public class ProductsController : Controller
+    public class ProductController : Controller
     {
         private readonly IProductService _productService;
 
-        public ProductsController(IProductService productService)
+        public ProductController(IProductService productService)
         {
             if (productService == null) throw new ArgumentNullException(nameof(productService));
             this._productService = productService;
