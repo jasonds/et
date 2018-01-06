@@ -9,8 +9,8 @@ using System;
 namespace et.api.infrastructure.Migrations
 {
     [DbContext(typeof(EtContext))]
-    [Migration("20180106211951_Initial")]
-    partial class Initial
+    [Migration("20180106230056_AddLocationCityState")]
+    partial class AddLocationCityState
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -24,7 +24,13 @@ namespace et.api.infrastructure.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("City")
+                        .IsRequired();
+
                     b.Property<string>("Name")
+                        .IsRequired();
+
+                    b.Property<string>("State")
                         .IsRequired();
 
                     b.HasKey("Id");

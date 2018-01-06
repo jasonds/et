@@ -20,6 +20,14 @@ namespace et.api.infrastructure.Data
                 .Property(p => p.Name)
                 .IsRequired();
 
+            modelBuilder.Entity<Location>()
+                .Property(p => p.City)
+                .IsRequired();
+
+            modelBuilder.Entity<Location>()
+                .Property(p => p.State)
+                .IsRequired();
+
             modelBuilder.Entity<Product>()
                 .HasOne(p => p.Location)
                 .WithMany(x => x.Products)

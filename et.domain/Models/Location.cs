@@ -22,6 +22,10 @@ namespace et.domain.Models
 
         public string Name { get; set; }
 
+        public string City { get; set; }
+
+        public string State { get; set; }
+
         public ICollection<Product> Products { get; private set; }
     }
 }
