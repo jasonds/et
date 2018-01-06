@@ -10,11 +10,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "api", "api", "{05BEB94C-398
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "et.domain", "et.domain\et.domain.csproj", "{FE19C663-2F37-41E4-9E5C-0E77D0B988AF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "et.mobile", "et.mobile\et.mobile\et.mobile.csproj", "{C262D870-F5A1-48AE-97EA-0ED7491BC5E5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "et.mobile", "et.mobile\et.mobile.csproj", "{C262D870-F5A1-48AE-97EA-0ED7491BC5E5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "et.mobile.iOS", "et.mobile\iOS\et.mobile.iOS.csproj", "{9644B154-7C58-4F76-B01D-3181554A4AB5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "et.mobile.iOS", "et.mobile.iOS\et.mobile.iOS.csproj", "{9644B154-7C58-4F76-B01D-3181554A4AB5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "et.mobile.Droid", "et.mobile\Droid\et.mobile.Droid.csproj", "{BBDE7ABD-0CE3-4FEE-83D0-03E1330E0331}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "et.mobile.droid", "et.mobile.droid\et.mobile.Droid.csproj", "{BBDE7ABD-0CE3-4FEE-83D0-03E1330E0331}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "et.bridge", "et.bridge\et.bridge.csproj", "{52A247A7-A56A-4389-93EE-C5A455A4FD93}"
 EndProject
