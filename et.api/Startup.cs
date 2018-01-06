@@ -1,11 +1,15 @@
-﻿using et.bridge.Services;
+﻿using et.api.application.Contracts;
+using et.api.application.Services;
+using et.api.domain.Repositories;
+using et.api.infrastructure.Data;
+using et.api.infrastructure.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace et.bridge
+namespace et.api
 {
     public class Startup
     {
@@ -24,19 +28,21 @@ namespace et.bridge
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // Add the configuration singleton here
-            services.AddSingleton<IConfiguration>(Configuration);
+            services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddDbContext<EtContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("EtContext")));
+            services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            app.UseWebSockets();
-            app.UseMiddleware<BridgeService>();
-            app.Run(async (context) =>
+            if (env.IsDevelopment())
             {
-                await context.Response.WriteAsync("ET Bridge Service");
-            });
+                app.UseDeveloperExceptionPage();
+            }
+
+            app.UseMvc();
         }
     }
 }
