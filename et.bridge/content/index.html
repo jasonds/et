@@ -20,8 +20,8 @@
       <form v-on:submit.prevent="sendUpdate">
           <input type="text" v-model="name" id="message-box" class="form-control form-control-lg" 
             placeholder="Type name here..." />
-          <input type="text" v-model="op" id="message-box" class="form-control form-control-lg" 
-            placeholder="Type op here..." />
+          <input type="text" v-model="count" id="message-box" class="form-control form-control-lg" 
+            placeholder="Type count here..." />
             <input type="submit" />
       </form>
       </div>
@@ -36,7 +36,7 @@
           {{ message.name }}
         </div>
         <div>
-          {{ message.op }}
+          {{ message.count }}
         </div>
       </div>
     </div>
@@ -49,7 +49,7 @@
   <script>
     const data = {
       name: '',
-      op: '',
+      count: '',
       messages: []
     };
     const app = new Vue({
@@ -57,9 +57,9 @@
       data: data,
       methods: {
         sendUpdate: function () {
-          sendMessage(this.name, this.op);
+          sendMessage(this.name, this.count);
           this.name = '';
-          this.op = '';
+          this.count = '';
         }
       }
     });
@@ -82,7 +82,8 @@
         .configureLogging(signalR.LogLevel.Information)
         .build();
         
-      connection.on('newMessage', newMessage);
+      connection.on('newMessageRegister', newMessage);
+      connection.on('newMessageKitchen', newMessage);
       connection.onclose(() => console.log('disconnected'));
       console.log('connecting...');
       connection.start()
@@ -100,10 +101,10 @@
       return axios.post(`${apiBaseUrl}/api/signalrinfo`, null, getAxiosConfig())
         .then(resp => resp.data);
     }
-    function sendMessage(name, op) {
+    function sendMessage(name, count) {
       return axios.post(`${apiBaseUrl}/api/sendupdate`, {
         name: name,
-        op: op
+        count: count
       }, getAxiosConfig()).then(resp => resp.data);
     }
     function getMessages() {

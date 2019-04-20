@@ -1,3 +1,5 @@
 export const Company = "ET";
 
-export const NewMessage = "newMessage";
+export const NewMessageRegister = "newMessageRegister";
+
+export const NewMessageKitchen = "newMessageKitchen";
