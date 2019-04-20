@@ -4,21 +4,12 @@ import {
   StyleSheet,
 } from 'react-native';
 import { ListItem } from 'react-native-elements';
-import { on, off } from '../services/BridgeService';
+import { on, off, sendUpdate } from '../services/BridgeService';
 import * as ET from '../core';
 
 export class TrackerList extends React.Component {
-
-  componentDidMount() {
-    on(ET.Constants.NewMessage, (m) => alert(m.name + " " + m.op));
-  }
-
-  componentWillUnmount() {
-    off(ET.Constants.NewMessage);
-  }
-
-  render() {
-    const data = [
+  state = { 
+    data: [
       {key: 'BEEF', count: 0},
       {key: 'BBQ CHICKEN', count: 0},
       {key: 'HAM & CHEESE', count: 0},
@@ -34,24 +25,54 @@ export class TrackerList extends React.Component {
       {key: 'BANANA NUTELLA (V)', count: 0},
       {key: 'BACON, CHEDDAR & EGG', count: 0},
       {key: 'CHORIZO, BLACK BEAN & EGG', count: 0},
-    ];
+    ]
+  };
 
-    return (<FlatList data={data} renderItem={({item}) => this._renderRow(item)}/>);
+  componentDidMount() {
+    on(ET.Constants.NewMessage, (m) => this._updateManifest(m));
+  }
+
+  componentWillUnmount() {
+    off(ET.Constants.NewMessage);
+  }
+
+  render() {
+    return (<FlatList data={this.state.data} extraData={this.state} renderItem={({item}) => this._renderRow(item)}/>);
   }
 
   _renderRow = (item: any) => {
     return(<ListItem 
               bottomDivider
               leftIcon={this.props.icon}
-              onPress={() => this._emitMessage(item.key, this.props.isDecrement)}
+              onPress={() => this._emitMessage(item, this.props.isDecrement)}
               key={item} 
               title={item.key} 
-              badge={{ value: item.count, textStyle: { color: 'white' } }}
+              badge={{ value: item.count, textStyle: { color: 'white' }, status: this.props.isDecrement ? 'error' : 'success'}}
     />);
   }
 
-  _emitMessage = (itemKey: AnalyserNode, isDecrement: bool) => {
-    console.warn(isDecrement);
+  _emitMessage = (item: any, isDecrement: bool) => {
+    let payload = new ET.Models.UpdatePayload();
+    payload.name = item.key;
+    payload.count = item.count + (isDecrement ? -1 : 1);
+
+    sendUpdate({name: payload.name, count: payload.count});
+  }
+
+  _updateManifest = (m: any) => {
+    let { data } = this.state;
+
+    if(m === null) {
+      console.warn("Received invalid message");
+      return;
+    }
+
+    for (var i=0; i < data.length; i++) {
+      if (data[i].key === m.name) {
+        data[i].count = m.count;
+        this.setState({ data: data });
+      }
+    }
   }
 }
 

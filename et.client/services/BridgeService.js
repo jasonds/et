@@ -48,6 +48,6 @@ export function off(topic) {
 export function sendUpdate(payload) {
   let route = new ET.API.FunctionRoute("sendupdate");
 
-  ET.API.post(route)
+  ET.API.post(route, payload)
     .then(resp => resp.data);
 }
