@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { SafeAreaView, ScrollView } from 'react-navigation';
 import { TrackerHeader, TrackerList } from '../components';
+import Colors from '../constants/Colors';
 
 export default class KitchenScreen extends React.Component {
   static navigationOptions = {
@@ -15,7 +16,7 @@ export default class KitchenScreen extends React.Component {
         <TrackerHeader title="KITCHEN" />
         <SafeAreaView style={styles.container}>
           <ScrollView style={styles.container}>
-            <TrackerList icon={{ name: 'add' }}/>
+            <TrackerList icon={{ name: 'file-upload', color: Colors.tintColor  }}/>
           </ScrollView>
         </SafeAreaView>
       </>

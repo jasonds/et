@@ -10,6 +10,7 @@ import {
 import { ListItem } from 'react-native-elements';
 import { SafeAreaView, ScrollView, FlatList } from 'react-navigation';
 import { MonoText, TrackerHeader, TrackerList } from '../components';
+import Colors from '../constants/Colors';
 
 export default class RegisterScreen extends React.Component {
   static navigationOptions = {
@@ -22,7 +23,7 @@ export default class RegisterScreen extends React.Component {
         <TrackerHeader title="REGISTER" />
         <SafeAreaView style={styles.container}>
           <ScrollView style={styles.container}>
-            <TrackerList isDecrement icon={{ name: 'clear' }}/>
+            <TrackerList isDecrement icon={{ name: 'file-download', color: Colors.tintColor }}/>
           </ScrollView>
         </SafeAreaView>
       </>
