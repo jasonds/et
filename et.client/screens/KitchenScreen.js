@@ -11,7 +11,7 @@ export default class KitchenScreen extends React.Component {
   };
 
   componentDidMount() {
-    //connect();
+    connect();
   }
 
   render() {

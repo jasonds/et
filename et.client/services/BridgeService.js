@@ -8,20 +8,21 @@ export function getConnectionInfo() {
     .then(resp => resp.data);
 }
 
-export function connect(funcForMessages) {
+const connection = null;
+export function connect() {
     getConnectionInfo().then(info => { 
       console.log(info);
       const options = {
         accessTokenFactory: () => info.accessToken
       };
-      
-      const connection = new signalR.HubConnectionBuilder()
+
+      connection = new signalR.HubConnectionBuilder()
         .withUrl(info.url, options)
         .configureLogging(signalR.LogLevel.Information)
         .build();
-        
-      connection.on('newMessage', newMessage);
+
       connection.onclose(() => console.log('disconnected'));
+
       console.log('connecting...');
       connection.start()
         .then(() => console.log('connected!'))
@@ -30,6 +31,21 @@ export function connect(funcForMessages) {
     }).catch(console.error);
 }
 
-function newMessage(message) {
-  alert(message);
+export function on(topic, cb) {
+  if (connection) {
+    connection.on(topic, cb);
+  }
+}
+
+export function off(topic) {
+  if (connection) {
+    connection.off(topic);
+  }
+}
+
+export function sendUpdate(payload) {
+  let route = new ET.API.FunctionRoute("sendupdate");
+
+  ET.API.post(route)
+    .then(resp => resp.data);
 }
