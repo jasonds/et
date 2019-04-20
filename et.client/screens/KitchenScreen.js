@@ -3,12 +3,16 @@ import { StyleSheet } from 'react-native';
 import { SafeAreaView, ScrollView } from 'react-navigation';
 import { TrackerHeader, TrackerList } from '../components';
 import Colors from '../constants/Colors';
+import { connect } from "../services/BridgeService";
 
 export default class KitchenScreen extends React.Component {
   static navigationOptions = {
-    header: null,
-    // title: 'Kitchen',
+    header: null
   };
+
+  componentDidMount() {
+    //connect();
+  }
 
   render() {
     return (

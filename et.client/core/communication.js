@@ -4,25 +4,25 @@ import * as ET from '../core';
 class FunctionRoute {
   constructor(action) {
       this.action = action;
-      this.fullUrl = "/" + controller + (action ? "/" + action : '');
+      this.fullUrl = "/" + action;
   }
 }
 
 const instance = axios.default;
 
-async function get(route) {
-  return (await instance.get(makeUrl(routeData, queryString), config)).data;
+function get(route) {
+  return axios.get(makeUrl(route));
 };
 
-async function post(route, payload) {
-  return (await instance.post(makeUrl(routeData), payload, config)).data;
+function post(route, payload) {
+  return axios.post(makeUrl(route), payload);
 };
 
 function makeUrl(
-  routeData
+  route
 ) {
   const baseUrl = ET.Configuration.api;
-  let url = `${baseUrl}api${routeData.url()}`;
+  let url = `${baseUrl}/api${route.fullUrl}`;
 
   return url;
 }

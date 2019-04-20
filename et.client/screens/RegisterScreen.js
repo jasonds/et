@@ -11,11 +11,16 @@ import { ListItem } from 'react-native-elements';
 import { SafeAreaView, ScrollView, FlatList } from 'react-navigation';
 import { MonoText, TrackerHeader, TrackerList } from '../components';
 import Colors from '../constants/Colors';
+import { connect } from "../services/BridgeService";
 
 export default class RegisterScreen extends React.Component {
   static navigationOptions = {
-    header: null,
+    header: null
   };
+
+  componentDidMount() {
+    connect();
+  }
 
   render() {
     return (
