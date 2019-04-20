@@ -1,0 +1,29 @@
+{
+  "disabled": false,
+  "bindings": [
+      {
+          "authLevel": "anonymous",
+          "type": "httpTrigger",
+          "direction": "in",
+          "name": "req",
+          "route": "getstate",
+          "methods": [
+              "get"
+          ]
+      },
+      {
+          "type": "http",
+          "direction": "out",
+          "name": "res"
+      },
+      {
+          "name": "getstate",
+          "type": "cosmosDB",
+          "databaseName": "etfranklin",
+          "collectionName": "etfranklinstate",
+          "sqlQuery": "select * from c order by c._ts desc",
+          "connectionStringSetting": "CosmosDBConnectionString",
+          "direction": "in"
+      }
+  ]
+}
