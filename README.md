@@ -1,2 +1,2 @@
 # et
-A tool for tracking tiny pasty pillows filled with savory delights
+A tool for tracking tiny pastry pillows filled with savory delights
