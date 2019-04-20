@@ -8,7 +8,7 @@ export function getConnectionInfo() {
     .then(resp => resp.data);
 }
 
-const connection = null;
+let connection = null;
 export function connect() {
     return getConnectionInfo()
       .then(info => { 
