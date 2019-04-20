@@ -10,25 +10,27 @@ export function getConnectionInfo() {
 
 const connection = null;
 export function connect() {
-    getConnectionInfo().then(info => { 
-      console.log(info);
-      const options = {
-        accessTokenFactory: () => info.accessToken
-      };
+    return getConnectionInfo()
+      .then(info => { 
+        console.log(info);
+        const options = {
+          accessTokenFactory: () => info.accessToken
+        };
 
-      connection = new signalR.HubConnectionBuilder()
-        .withUrl(info.url, options)
-        .configureLogging(signalR.LogLevel.Information)
-        .build();
+        connection = new signalR.HubConnectionBuilder()
+          .withUrl(info.url, options)
+          .configureLogging(signalR.LogLevel.Information)
+          .build();
 
-      connection.onclose(() => console.log('disconnected'));
+        connection.onclose(() => console.log('disconnected'));
 
-      console.log('connecting...');
-      connection.start()
-        .then(() => console.log('connected!'))
-        .catch(console.error);
+        console.log('connecting...');
+        connection.start()
+          .then(() => console.log('connected!'))
+          .catch(console.error);
 
-    }).catch(console.error);
+      })
+      .catch(console.error);
 }
 
 export function on(topic, cb) {

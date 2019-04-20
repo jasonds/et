@@ -4,8 +4,19 @@ import {
   StyleSheet,
 } from 'react-native';
 import { ListItem } from 'react-native-elements';
+import { on, off } from '../services/BridgeService';
+import * as ET from '../core';
 
 export class TrackerList extends React.Component {
+
+  componentDidMount() {
+    on(ET.Constants.NewMessage, (m) => alert(m.name + " " + m.op));
+  }
+
+  componentWillUnmount() {
+    off(ET.Constants.NewMessage);
+  }
+
   render() {
     const data = [
       {key: 'BEEF', count: 0},
