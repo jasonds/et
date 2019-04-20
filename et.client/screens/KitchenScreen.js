@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 import { SafeAreaView, ScrollView } from 'react-navigation';
 import { TrackerHeader, TrackerList } from '../components';
 import Colors from '../constants/Colors';
-import { connect } from "../services/BridgeService";
+import * as ET from "../core";
 
 export default class KitchenScreen extends React.Component {
   static navigationOptions = {
@@ -16,7 +16,7 @@ export default class KitchenScreen extends React.Component {
         <TrackerHeader title="KITCHEN" />
         <SafeAreaView style={styles.container}>
           <ScrollView style={styles.container}>
-            <TrackerList icon={{ name: 'file-upload', color: Colors.tintColor  }}/>
+            <TrackerList subscription={ET.Constants.NewMessageKitchen} icon={{ name: 'file-upload', color: Colors.tintColor  }}/>
           </ScrollView>
         </SafeAreaView>
       </>

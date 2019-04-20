@@ -29,11 +29,11 @@ export class TrackerList extends React.Component {
   };
 
   componentDidMount() {
-    on(ET.Constants.NewMessage, (m) => this._updateManifest(m));
+    on(this.props.subscription, (m) => this._updateManifest(m));
   }
 
   componentWillUnmount() {
-    off(ET.Constants.NewMessage);
+    off(this.props.subscription);
   }
 
   render() {

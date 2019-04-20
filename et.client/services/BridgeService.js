@@ -23,7 +23,7 @@ export function connect() {
           .build();
 
         connection.onclose(() => console.log('disconnected'));
-
+        
         console.log('connecting...');
         connection.start()
           .then(() => console.log('connected!'))
