@@ -1,0 +1,35 @@
+{
+    "disabled": false,
+    "bindings": [
+        {
+            "authLevel": "anonymous",
+            "type": "httpTrigger",
+            "direction": "in",
+            "name": "req",
+            "route": "sendupdate",
+            "methods": [
+                "post"
+            ]
+        },
+        {
+            "type": "http",
+            "direction": "out",
+            "name": "res"
+        },
+        {
+            "name": "cosmosDBMessage",
+            "type": "cosmosDB",
+            "databaseName": "etfranklin",
+            "collectionName": "etfranklinstate",
+            "createIfNotExists": true, 
+            "connectionStringSetting": "CosmosDBConnectionString",
+            "direction": "out"
+        },
+        {
+            "type": "signalR",
+            "name": "signalRMessages",
+            "hubName": "etfranklin",
+            "direction": "out"
+        }
+    ]
+}
