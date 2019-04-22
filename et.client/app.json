@@ -24,6 +24,11 @@
     ],
     "ios": {
       "supportsTablet": true
-    }
+    },
+    "android": {
+      "package": "com.rightpoint.empanadatracker"
+    },
+    "description": "Uses signalR to allow the \"kitchen\" to update \"register\" of current inventory and vice versa",
+    "githubUrl": "https://github.com/jasonds/et"
   }
 }
