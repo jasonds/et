@@ -56,6 +56,16 @@ export class TrackerList extends React.Component {
     payload.name = item.key;
     payload.count = item.count + (isDecrement ? -1 : 1);
 
+    // set to zero if count is negative
+    if (payload.count < 0) {
+      payload.count = 0;
+    }
+
+    // return if the value has not changed
+    if (payload.count === item.count) {
+      return;
+    }
+
     sendUpdate({name: payload.name, count: payload.count});
   }
 
