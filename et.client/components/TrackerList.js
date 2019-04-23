@@ -50,6 +50,7 @@ export class TrackerList extends React.Component {
             />);
   }
 
+  _emitMessageTimeout = [];
   _emitMessage = (item, isDecrement) => {
     let payload = new ET.Models.UpdatePayload();
     payload.name = item.key;
@@ -65,9 +66,26 @@ export class TrackerList extends React.Component {
       return;
     }
 
+    // set state immediately
+    let { data } = this.state;
+    for (var i=0; i < data.length; i++) {
+      if (data[i].key === payload.name) {
+        data[i].count = payload.count;
+        this.setState({ data: data });
+      }
+    }
 
+    // clear the timer if it is set for this recipe
+    if (this._emitMessageTimeout[payload.name]) {
+      clearTimeout(this._emitMessageTimeout[payload.name]);
+    }
 
-    sendUpdate({name: payload.name, count: payload.count});
+    // queue the update to happen in 2 seconds
+    let self = this;
+    this._emitMessageTimeout[payload.name] = setTimeout(() => {
+        sendUpdate({name: payload.name, count: payload.count});
+        self._emitMessageTimeout[payload.name] = null;
+      }, 2000);
   }
 
   _updateManifest = (m) => {
