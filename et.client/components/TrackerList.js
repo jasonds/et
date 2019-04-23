@@ -3,8 +3,8 @@ import {
   FlatList,
   StyleSheet,
 } from 'react-native';
-import { ListItem } from 'react-native-elements';
 import { on, off, sendUpdate } from '../services/BridgeService';
+import { TrackerListItem } from './TrackerListItem';
 import * as ET from '../core';
 
 export class TrackerList extends React.Component {
@@ -37,21 +37,20 @@ export class TrackerList extends React.Component {
   }
 
   render() {
-    return (<FlatList data={this.state.data} extraData={this.state} renderItem={({item}) => this._renderRow(item)}/>);
+    return (<FlatList data={this.state.data} extraData={this.state} renderItem={({item}) => this._renderRow(item)} />);
   }
 
-  _renderRow = (item: any) => {
-    return(<ListItem 
-              bottomDivider
-              leftIcon={this.props.icon}
-              onPress={() => this._emitMessage(item, this.props.isDecrement)}
-              key={item} 
-              title={item.key} 
-              badge={{ value: item.count, textStyle: { color: 'white' }, status: this.props.isDecrement ? 'error' : 'success'}}
-    />);
+  _renderRow = (item) => {
+    return(<TrackerListItem 
+              item={item}
+              emitMessage={this._emitMessage}
+              icon={this.props.icon}
+              count={item.count}
+              isDecrement={this.props.isDecrement} 
+            />);
   }
 
-  _emitMessage = (item: any, isDecrement: bool) => {
+  _emitMessage = (item, isDecrement) => {
     let payload = new ET.Models.UpdatePayload();
     payload.name = item.key;
     payload.count = item.count + (isDecrement ? -1 : 1);
@@ -66,10 +65,12 @@ export class TrackerList extends React.Component {
       return;
     }
 
+
+
     sendUpdate({name: payload.name, count: payload.count});
   }
 
-  _updateManifest = (m: any) => {
+  _updateManifest = (m) => {
     let { data } = this.state;
 
     if(m === null) {
